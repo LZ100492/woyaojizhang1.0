@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Bill</string>
+    <string name="adddata">AddData</string>
+    <string name="收入">收入</string>
+    <string name="TextView">TextView</string>
+    <string name="返回主页">返回主页</string>
+    <string name="收入信息">收入信息</string>
+    <string name="支出信息">支出信息</string>
+    <string name="取消">取消</string>
+    <string name="确定">确定</string>
+    <string name="日期">日期</string>
+    <string name="明细">明细</string>
+    <string name="金额">金额</string>
+    <string name="原因">原因</string>
+    <string name="add2">添加收入</string>
+    <string name="支出">支出</string>
+</resources>
