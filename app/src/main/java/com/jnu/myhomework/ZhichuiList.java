@@ -74,7 +74,7 @@ public class ZhichuiList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhichulist);
 
-        /*返回日历界面*/
+        /*返回主界面*/
         btn2 = (Button)findViewById(R.id.zhuye2);
         btn2.setOnClickListener(new btnclock2());
 

@@ -73,7 +73,7 @@ public class ShouruList extends Activity {
         setContentView(R.layout.activity_shourulist);
 
 
-        /*-----------------返回日历界面----------------*/
+        /*-----------------返回主界面----------------*/
         btn2 = (Button) findViewById(R.id.zhuye);
 
         class btnclock2 implements OnClickListener {

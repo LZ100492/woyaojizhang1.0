@@ -37,7 +37,7 @@ public class AddShouruData extends Activity {
     }
 
     /*传输数据A端设置*/
-    class btnclock implements View.OnClickListener//监听接口，实现数据添加界面跳转到收礼信息界面
+    class btnclock implements View.OnClickListener//监听接口，实现数据添加界面跳转到收入信息界面
     {
         public void onClick(View v)
         {
