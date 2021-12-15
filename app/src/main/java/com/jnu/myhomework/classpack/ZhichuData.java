@@ -41,8 +41,8 @@ public class ZhichuData extends AddZhichuData implements Serializable {
 
     public String getReason(){return reason;}
 
-    public void setName(String suili_name){this.name = suili_name;}
-    public void setMoney(String suili_money){this.money = suili_money;}
-    public void setTime(String suili_time){this.time = suili_time;}
-    public void setReason(String shouli_reason){this.reason = shouli_reason;}
+    public void setName(String zhichu_name){this.name = zhichu_name;}
+    public void setMoney(String zhichu_money){this.money = zhichu_money;}
+    public void setTime(String zhichu_time){this.time = zhichu_time;}
+    public void setReason(String shouru_reason){this.reason = shouru_reason;}
 }
