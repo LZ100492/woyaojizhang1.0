@@ -34,16 +34,16 @@ public class ZhichuiList extends Activity {
     private static final int CONTEXT_MENU_ITEM_NEW = 1;
     private static final int CONTEXT_MENU_ITEM_DELETE = CONTEXT_MENU_ITEM_NEW+1;
 
-    private static final int REQUEST_CODE_ADD_SUILI = 100;
-    private static final int REQUEST_CODE_UPDATE_SUILI = 101;
+    private static final int REQUEST_CODE_ADD_ZHICHU = 100;
+    private static final int REQUEST_CODE_UPDATE_ZHICHU = 101;
 
     private ZhichuDataBank dataBank;
-    private SuiLiAdapter adapter;
+    private ZhichuAdapter adapter;
 
-    private class SuiLiAdapter extends ArrayAdapter<ZhichuData> {
+    private class ZhichuAdapter extends ArrayAdapter<ZhichuData> {
         private int resourceId;
 
-        public SuiLiAdapter(@NonNull Context context, int resource, @NonNull List<ZhichuData> objects) {
+        public ZhichuAdapter(@NonNull Context context, int resource, @NonNull List<ZhichuData> objects) {
             super(context, resource, objects);
             this.resourceId = resource;
         }
@@ -74,7 +74,7 @@ public class ZhichuiList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhichulist);
 
-        /*返回主界面*/
+        /*返回日历界面*/
         btn2 = (Button)findViewById(R.id.zhuye2);
         btn2.setOnClickListener(new btnclock2());
 
@@ -101,7 +101,7 @@ public class ZhichuiList extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode) {
 
-            case REQUEST_CODE_ADD_SUILI:
+            case REQUEST_CODE_ADD_ZHICHU:
                 if (resultCode == RESULT_OK) {
                     String suili_time = data.getStringExtra("suili_time");
                     String suili_name = data.getStringExtra("suili_name");
@@ -129,7 +129,7 @@ public class ZhichuiList extends Activity {
             case CONTEXT_MENU_ITEM_NEW:
                 intent = new Intent(ZhichuiList.this, AddZhichuData.class);
                 intent.putExtra("position",position);
-                startActivityForResult(intent, REQUEST_CODE_ADD_SUILI);
+                startActivityForResult(intent, REQUEST_CODE_ADD_ZHICHU);
 
                 break;
 
@@ -170,12 +170,11 @@ public class ZhichuiList extends Activity {
         if(0==dataBank.getSuiLiData().size())
         {
             dataBank.getSuiLiData().add(new ZhichuData(R.drawable.zhichu,"Time","Name","Money","Reason"));
-            dataBank.getSuiLiData().add(new ZhichuData(R.drawable.zhichu,"1111","zzz","100","wu"));
         }
     }
 
     private void initView() {
-        adapter = new SuiLiAdapter(this, R.layout.item_zhichu,  dataBank.getSuiLiData());
+        adapter = new ZhichuAdapter(this, R.layout.item_zhichu,  dataBank.getSuiLiData());
 
         ListView listViewSuili=findViewById(R.id.ZhichuList);
         listViewSuili.setAdapter(adapter);

@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 
 import com.jnu.myhomework.classpack.ShouruData;
 import com.jnu.myhomework.classpack.ShouruDataBank;
+import com.jnu.myhomework.classpack.ZhichuData;
 
 import java.util.List;
 
@@ -32,20 +33,20 @@ public class ShouruList extends Activity {
     private static final int CONTEXT_MENU_ITEM_NEW = 1;
     private static final int CONTEXT_MENU_ITEM_DELETE = CONTEXT_MENU_ITEM_NEW + 1;
 
-    private static final int REQUEST_CODE_ADD_SHOULI = 100;
-    private static final int REQUEST_CODE_UPDATE_SHOULI = 101;
+    private static final int REQUEST_CODE_ADD_SHOURU = 100;
+    private static final int REQUEST_CODE_UPDATE_SHOURU = 101;
 
     private ShouruDataBank dataBank;
-    private ShouLiAdapter adapter;
+    private ShouruAdapter adapter;
 
-    ListView ShouLiList;//控件声明
+    ListView ShouruList;//控件声明
     Button btn2;
 
 
-    private class ShouLiAdapter extends ArrayAdapter<ShouruData> {
+    private class ShouruAdapter extends ArrayAdapter<ShouruData> {
         private int resourceId;
 
-        public ShouLiAdapter(@NonNull Context context, int resource, @NonNull List<ShouruData> objects) {
+        public ShouruAdapter(@NonNull Context context, int resource, @NonNull List<ShouruData> objects) {
             super(context, resource, objects);
             this.resourceId = resource;
         }
@@ -73,7 +74,7 @@ public class ShouruList extends Activity {
         setContentView(R.layout.activity_shourulist);
 
 
-        /*-----------------返回主界面----------------*/
+        /*-----------------返回日历界面----------------*/
         btn2 = (Button) findViewById(R.id.zhuye);
 
         class btnclock2 implements OnClickListener {
@@ -86,7 +87,7 @@ public class ShouruList extends Activity {
         btn2.setOnClickListener(new btnclock2());
 
         /*Listview*/
-        ShouLiList = (ListView) findViewById(R.id.listview_shouru);//获取控件“ShouLiList”
+        ShouruList = (ListView) findViewById(R.id.listview_shouru);//获取控件“ShouLiList”
 
         initData();
         initView();
@@ -107,14 +108,14 @@ public class ShouruList extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode) {
 
-            case REQUEST_CODE_ADD_SHOULI:
+            case REQUEST_CODE_ADD_SHOURU:
                 if (resultCode == RESULT_OK) {
-                    String shouli_name = data.getStringExtra("shouli_name");
-                    String shouli_time = data.getStringExtra("shouli_time");
-                    String shouli_money = data.getStringExtra("shouli_money");
-                    String shouli_reason = data.getStringExtra("shouli_reason");
+                    String shouru_name = data.getStringExtra("shouli_name");
+                    String shouru_time = data.getStringExtra("shouli_time");
+                    String shouru_money = data.getStringExtra("shouli_money");
+                    String shouru_reason = data.getStringExtra("shouli_reason");
                     int position=data.getIntExtra("shouli_position",1);
-                    dataBank.getShouLiData().add(position,new ShouruData(R.drawable.zhichu,shouli_time,shouli_name,shouli_money,shouli_reason));
+                    dataBank.getShouLiData().add(position,new ShouruData(R.drawable.zhichu,shouru_time,shouru_name,shouru_money,shouru_reason));
                     dataBank.Save();
                     adapter.notifyDataSetChanged();
                 }
@@ -136,7 +137,7 @@ public class ShouruList extends Activity {
             case CONTEXT_MENU_ITEM_NEW:
                 intent = new Intent(ShouruList.this, AddShouruData.class);
                 intent.putExtra("position",position);
-                startActivityForResult(intent, REQUEST_CODE_ADD_SHOULI);
+                startActivityForResult(intent, REQUEST_CODE_ADD_SHOURU);
 
                 break;
 
@@ -176,17 +177,19 @@ public class ShouruList extends Activity {
             dataBank.Load();
             if(0==dataBank.getShouLiData().size())
             {
-                dataBank.getShouLiData().add(new ShouruData(R.drawable.zhichu,"Time","Name","Money","Reason"));
+                dataBank.getShouLiData().add(new ShouruData(R.drawable.zhichu,"Time","Reason","Money","Detail"));
+                dataBank.getShouLiData().add(new ShouruData(R.drawable.zhichu,"1213","  Food","   105","    None"));
+                dataBank.getShouLiData().add(new ShouruData(R.drawable.zhichu,"1214","  Cash","  6000","    None"));
             }
         }
 
         private void initView() {
-            adapter = new ShouLiAdapter(this, R.layout.item_shouru,  dataBank.getShouLiData());
+            adapter = new ShouruAdapter(this, R.layout.item_shouru,  dataBank.getShouLiData());
 
             ListView listViewShouli=findViewById(R.id.listview_shouru);
             listViewShouli.setAdapter(adapter);
 
-            this.registerForContextMenu(ShouLiList);
+            this.registerForContextMenu(ShouruList);
         }
 }
 
