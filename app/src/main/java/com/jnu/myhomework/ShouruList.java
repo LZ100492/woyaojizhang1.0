@@ -53,17 +53,17 @@ public class ShouruList extends Activity {
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            ShouruData shouLiData = getItem(position);//获取当前项的实例
+            ShouruData shouruData = getItem(position);//获取当前项的实例
             View view;
             if(null==convertView)
                 view = LayoutInflater.from(getContext()).inflate(this.resourceId, parent, false);
             else
                 view=convertView;
-            ((ImageView) view.findViewById(R.id.listview_shouru)).setImageResource(shouLiData.getShouruImageId());
-            ((TextView) view.findViewById(R.id.time)).setText(shouLiData.getTime());
-            ((TextView) view.findViewById(R.id.name)).setText(shouLiData.getName());
-            ((TextView) view.findViewById(R.id.money)).setText(shouLiData.getMoney());
-            ((TextView) view.findViewById(R.id.reason)).setText(shouLiData.getReason());
+            ((ImageView) view.findViewById(R.id.listview_shouru)).setImageResource(shouruData.getShouruImageId());
+            ((TextView) view.findViewById(R.id.time)).setText(shouruData.getTime());
+            ((TextView) view.findViewById(R.id.name)).setText(shouruData.getName());
+            ((TextView) view.findViewById(R.id.money)).setText(shouruData.getMoney());
+            ((TextView) view.findViewById(R.id.reason)).setText(shouruData.getReason());
             return view;
         }
     }
@@ -87,7 +87,7 @@ public class ShouruList extends Activity {
         btn2.setOnClickListener(new btnclock2());
 
         /*Listview*/
-        ShouruList = (ListView) findViewById(R.id.listview_shouru);//获取控件“ShouLiList”
+        ShouruList = (ListView) findViewById(R.id.listview_shouru);//获取控件“ShouruList”
 
         initData();
         initView();
@@ -110,12 +110,12 @@ public class ShouruList extends Activity {
 
             case REQUEST_CODE_ADD_SHOURU:
                 if (resultCode == RESULT_OK) {
-                    String shouru_name = data.getStringExtra("shouli_name");
-                    String shouru_time = data.getStringExtra("shouli_time");
-                    String shouru_money = data.getStringExtra("shouli_money");
-                    String shouru_reason = data.getStringExtra("shouli_reason");
-                    int position=data.getIntExtra("shouli_position",1);
-                    dataBank.getShouLiData().add(position,new ShouruData(R.drawable.zhichu,shouru_time,shouru_name,shouru_money,shouru_reason));
+                    String shouru_name = data.getStringExtra("shouru_name");
+                    String shouru_time = data.getStringExtra("shouru_time");
+                    String shouru_money = data.getStringExtra("shouru_money");
+                    String shouru_reason = data.getStringExtra("shouru_reason");
+                    int position=data.getIntExtra("shouru_position",1);
+                    dataBank.getShouruData().add(position,new ShouruData(R.drawable.zhichu,shouru_time,shouru_name,shouru_money,shouru_reason));
                     dataBank.Save();
                     adapter.notifyDataSetChanged();
                 }
@@ -145,12 +145,12 @@ public class ShouruList extends Activity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("询问");
-                builder.setMessage("确定删除\""+dataBank.getShouLiData().get(position).getName() + "\"这条记录吗？");
+                builder.setMessage("确定删除\""+dataBank.getShouruData().get(position).getName() + "\"这条记录吗？");
                 builder.setCancelable(true);
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dataBank.getShouLiData().remove(position);
+                        dataBank.getShouruData().remove(position);
                         dataBank.Save();
                         adapter.notifyDataSetChanged();
                     }
@@ -175,16 +175,16 @@ public class ShouruList extends Activity {
         {
             dataBank=new ShouruDataBank(this);
             dataBank.Load();
-            if(0==dataBank.getShouLiData().size())
+            if(0==dataBank.getShouruData().size())
             {
-                dataBank.getShouLiData().add(new ShouruData(R.drawable.zhichu,"Time","Reason","Money","Detail"));
-                dataBank.getShouLiData().add(new ShouruData(R.drawable.zhichu,"1213","  Food","   105","    None"));
-                dataBank.getShouLiData().add(new ShouruData(R.drawable.zhichu,"1214","  Cash","  6000","    None"));
+                dataBank.getShouruData().add(new ShouruData(R.drawable.zhichu,"Time","Reason","Money","Detail"));
+                dataBank.getShouruData().add(new ShouruData(R.drawable.zhichu,"1213","  Food","   105","    None"));
+                dataBank.getShouruData().add(new ShouruData(R.drawable.zhichu,"1214","  Cash","  6000","    None"));
             }
         }
 
         private void initView() {
-            adapter = new ShouruAdapter(this, R.layout.item_shouru,  dataBank.getShouLiData());
+            adapter = new ShouruAdapter(this, R.layout.item_shouru,  dataBank.getShouruData());
 
             ListView listViewShouli=findViewById(R.id.listview_shouru);
             listViewShouli.setAdapter(adapter);

@@ -79,7 +79,7 @@ public class ZhichuiList extends Activity {
         btn2.setOnClickListener(new btnclock2());
 
         /*Listview*/
-        ZhichuList = (ListView)findViewById(R.id.ZhichuList);//获取控件“ShouLiList”
+        ZhichuList = (ListView)findViewById(R.id.ZhichuList);
 
         initData();
         initView();
@@ -103,12 +103,12 @@ public class ZhichuiList extends Activity {
 
             case REQUEST_CODE_ADD_ZHICHU:
                 if (resultCode == RESULT_OK) {
-                    String suili_time = data.getStringExtra("suili_time");
-                    String suili_name = data.getStringExtra("suili_name");
-                    String suili_money = data.getStringExtra("suili_money");
-                    String suili_reason = data.getStringExtra("suili_reason");
-                    int position = data.getIntExtra("suili_position", 1);
-                    dataBank.getSuiLiData().add(position, new ZhichuData(R.drawable.zhichu, suili_time, suili_name, suili_money,suili_reason));
+                    String zhichu_time = data.getStringExtra("zhichu_time");
+                    String zhichu_name = data.getStringExtra("zhichu_name");
+                    String zhichu_money = data.getStringExtra("zhichu_money");
+                    String zhichu_reason = data.getStringExtra("zhichu_reason");
+                    int position = data.getIntExtra("zhichu_position", 1);
+                    dataBank.getZhichuData().add(position, new ZhichuData(R.drawable.zhichu, zhichu_time, zhichu_name, zhichu_money,zhichu_reason));
                     dataBank.Save();
                     adapter.notifyDataSetChanged();
                 }
@@ -137,12 +137,12 @@ public class ZhichuiList extends Activity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("询问");
-                builder.setMessage("确定删除\""+dataBank.getSuiLiData().get(position).getName() + "\"这条记录吗？");
+                builder.setMessage("确定删除\""+dataBank.getZhichuData().get(position).getName() + "\"这条记录吗？");
                 builder.setCancelable(true);
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dataBank.getSuiLiData().remove(position);
+                        dataBank.getZhichuData().remove(position);
                         dataBank.Save();
                         adapter.notifyDataSetChanged();
                     }
@@ -167,14 +167,14 @@ public class ZhichuiList extends Activity {
     {
         dataBank=new ZhichuDataBank(this);
         dataBank.Load();
-        if(0==dataBank.getSuiLiData().size())
+        if(0==dataBank.getZhichuData().size())
         {
-            dataBank.getSuiLiData().add(new ZhichuData(R.drawable.zhichu,"Time","Name","Money","Reason"));
+            dataBank.getZhichuData().add(new ZhichuData(R.drawable.zhichu,"Time","Name","Money","Reason"));
         }
     }
 
     private void initView() {
-        adapter = new ZhichuAdapter(this, R.layout.item_zhichu,  dataBank.getSuiLiData());
+        adapter = new ZhichuAdapter(this, R.layout.item_zhichu,  dataBank.getZhichuData());
 
         ListView listViewSuili=findViewById(R.id.ZhichuList);
         listViewSuili.setAdapter(adapter);
