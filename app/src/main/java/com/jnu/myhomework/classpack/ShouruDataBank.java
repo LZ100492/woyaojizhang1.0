@@ -12,7 +12,7 @@ public class ShouruDataBank {
     private Context context;
     private final String Shouru_FILE_NAME = "ShouruData.txt";
     public ShouruDataBank(Context context){this. context = context;}
-    public ArrayList<ShouruData> getShouLiData(){return arrayListShouru;}
+    public ArrayList<ShouruData> getShouruData(){return arrayListShouru;}
 
     public void Save()
     {

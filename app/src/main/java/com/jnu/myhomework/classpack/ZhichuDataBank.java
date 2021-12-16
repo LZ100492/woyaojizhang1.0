@@ -12,7 +12,7 @@ public class ZhichuDataBank {
     private Context context;
     private final String Zhichu_FILE_NAME = "ZhichuData.txt";
     public ZhichuDataBank(Context context){this. context = context;}
-    public ArrayList<ZhichuData> getSuiLiData(){return arrayListZhichu;}
+    public ArrayList<ZhichuData> getZhichuData(){return arrayListZhichu;}
 
     public void Save()
     {
